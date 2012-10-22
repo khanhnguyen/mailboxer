@@ -52,8 +52,8 @@ module Mailboxer
 
       #Sends a messages, starting a new conversation, with the messageable
       #as originator
-      def send_message(recipients, msg_body, subject, sanitize_text=true, attachment=nil)
-        convo = Conversation.new({:subject => subject})
+      def send_message(recipients, msg_body, subject, sanitize_text=true, attachment=nil, is_alert=false)
+        convo = Conversation.new({:subject => subject, :is_alert => is_alert})
         message = messages.new({:body => msg_body, :subject => subject, :attachment => attachment})
         message.conversation = convo
         message.recipients = recipients.is_a?(Array) ? recipients : [recipients]
