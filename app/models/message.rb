@@ -13,6 +13,10 @@ class Message < Notification
   mount_uploader :attachment, AttachmentUploader
   
   include Concerns::ConfigurableMailer
+  
+  def receiver(object)
+    self.receipts.find_by_receiver_type "#{object}"
+  end
 
   class << self
     #Sets the on deliver callback method.
